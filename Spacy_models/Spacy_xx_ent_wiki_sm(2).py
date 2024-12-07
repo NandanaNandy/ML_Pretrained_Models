@@ -556,7 +556,7 @@
 
 
 
-# # code 5
+# code 5
 import re
 import spacy
 import time
@@ -683,6 +683,8 @@ def extract_schema_with_spacy_and_regex(text):
 text = """GATE: GATE 2022 Scorecard Graduate Aptitude Test in Engineering Graduate Aptitude Test in Engineering (GATE) Name of Candidate MOHAMMAD WASIF ANSARI Parent's/Guardian's AKHTARI KHATOON Registration Number 1234567890 Examination Paper Computer Science and Information Technology (CS) GATE Score: 855 Marks out of 100: 63.33 All India Rank in this paper: 68 Valid up to 31st March 2025"""
 extracted_data = extract_schema_with_spacy_and_regex(text)
 print(extracted_data)
+
+
 
 
 
@@ -842,136 +844,136 @@ print(extracted_data)
 
 
 
-# import re
-# import spacy
-# import time
+import re
+import spacy
+import time
 
-# # Load the spaCy model
-# nlp = spacy.load("en_core_web_sm")
+# Load the spaCy model
+nlp = spacy.load("en_core_web_sm")
 
-# def extract_schema_with_spacy_and_regex(text):
-#     start_time = time.time()
+def extract_schema_with_spacy_and_regex(text):
+    start_time = time.time()
 
-#     # Process the text using spaCy for Named Entity Recognition (NER)
-#     doc = nlp(text)
+    # Process the text using spaCy for Named Entity Recognition (NER)
+    doc = nlp(text)
 
-#     # Define a function to get entities from spaCy output
-#     def get_entities(label):
-#         return [ent.text.strip() for ent in doc.ents if ent.label_ == label]
+    # Define a function to get entities from spaCy output
+    def get_entities(label):
+        return [ent.text.strip() for ent in doc.ents if ent.label_ == label]
 
-#     # Define a function to clean the input text by removing extra spaces and irrelevant characters
-#     def clean_text(text):
-#         # Remove unwanted characters and excessive whitespace
-#         text = text.lower()  # Convert to lowercase
-#         cleaned_text = re.sub(r"[^a-zA-Z0-9\s.,;:!?&/-]", "", text)  # Remove special chars
-#         cleaned_text = re.sub(r"\s+", " ", cleaned_text).strip()  # Remove extra spaces
-#         return cleaned_text
+    # Define a function to clean the input text by removing extra spaces and irrelevant characters
+    def clean_text(text):
+        # Remove unwanted characters and excessive whitespace
+        text = text.lower()  # Convert to lowercase
+        cleaned_text = re.sub(r"[^a-zA-Z0-9\s.,;:!?&/-]", "", text)  # Remove special chars
+        cleaned_text = re.sub(r"\s+", " ", cleaned_text).strip()  # Remove extra spaces
+        return cleaned_text
 
-#     # Function to identify the certificate type based on the content of the text
-#     def identify_certificate_type(text):
-#         print(f"Analyzing text: {text[:100]}...")  # Print the first 100 characters for debugging
+    # Function to identify the certificate type based on the content of the text
+    def identify_certificate_type(text):
+        print(f"Analyzing text: {text[:100]}...")  # Print the first 100 characters for debugging
 
-#         # Use regular expressions for broader matching
-#         if re.search(r"(GATE.*Score|Gate.*Score)", text):
-#             return "gate_score_card"
-#         elif re.search(r"(birth.*certificate)", text, re.IGNORECASE):
-#             return "birth_certificate"
-#         elif re.search(r"(degree.*certificate)", text, re.IGNORECASE):
-#             return "eq_certificate"
-#         elif re.search(r"(marksheet.*(10th|12th))", text, re.IGNORECASE):
-#             return "marksheet_10th" if "10th" in text.lower() else "marksheet_12th"
-#         elif re.search(r"(disability.*certificate)", text, re.IGNORECASE):
-#             return "pwd_certificate"
-#         elif re.search(r"(experience.*certificate)", text, re.IGNORECASE):
-#             return "experience_certificate"
-#         elif re.search(r"(phd.*certificate)", text, re.IGNORECASE):
-#             return "phd_certificate"
-#         else:
-#             return "unknown"  # Default fallback if no match found
-#         # Automatically detect the certificate type
-#     cert_type = identify_certificate_type(text)
+        # Use regular expressions for broader matching
+        if re.search(r"(GATE.*Score|Gate.*Score)", text):
+            return "gate_score_card"
+        elif re.search(r"(birth.*certificate)", text, re.IGNORECASE):
+            return "birth_certificate"
+        elif re.search(r"(degree.*certificate)", text, re.IGNORECASE):
+            return "eq_certificate"
+        elif re.search(r"(marksheet.*(10th|12th))", text, re.IGNORECASE):
+            return "marksheet_10th" if "10th" in text.lower() else "marksheet_12th"
+        elif re.search(r"(disability.*certificate)", text, re.IGNORECASE):
+            return "pwd_certificate"
+        elif re.search(r"(experience.*certificate)", text, re.IGNORECASE):
+            return "experience_certificate"
+        elif re.search(r"(phd.*certificate)", text, re.IGNORECASE):
+            return "phd_certificate"
+        else:
+            return "unknown"  # Default fallback if no match found
+        # Automatically detect the certificate type
+    cert_type = identify_certificate_type(text)
 
-#     # Define extractors with regex and spaCy entities
-#     extractors = {
-#         "gate_score_card": {
-#             "candidate_name": re.search(r"Name of Candidate[:\s]*([A-Za-z\s]+)", text),
-#             "parent_name": re.search(r"Parent's/Guardian's Name[:\s]*([A-Za-z\s]+)", text),
-#             "registration_number": re.search(r"Registration Number[:\s]*([\w-]+)", text),
-#             "exam_paper": re.search(r"Examination Paper[:\s]*([A-Za-z\s]+)", text),
-#             "gate_score": re.search(r"GATE Score[:\s]*([\d.]+)", text),
-#             "marks": re.search(r"Marks out of 100[:\s]*([\d.]+)", text),
-#             "rank": re.search(r"All India Rank[:\s]*([\d]+)", text),
-#             "validity_date": re.search(r"Valid up to[:\s]*([\d\sA-Za-z]+)", text),
-#             "candidate_name_spacy": get_entities("PERSON"),
-#             "validity_date_spacy": get_entities("DATE"),
-#         },
-#         "birth_certificate": {
-#             "name": re.search(r"name[:\s]*([\w\s]+)", text),
-#             "date_of_birth": re.search(r"date of birth[:\s]*(\d{2}-\d{2}-\d{4})", text),
-#             "name_spacy": get_entities("PERSON"),
-#             "date_of_birth_spacy": get_entities("DATE"),
-#         },
-#         "eq_certificate": {
-#             "name": re.search(r"name[:\s]*([\w\s]+)", text),
-#             "degree": re.search(r"degree[:\s]*([\w\s]+)", text),
-#             "cgpa": re.search(r"cgpa[:\s]*([\d.]+)", text),
-#             "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
-#             "class": re.search(r"class[:\s]*([\w\s]+)", text),
-#             "name_spacy": get_entities("PERSON"),
-#             "degree_spacy": get_entities("ORG"),
-#         },
-#         "marksheet_10th": {
-#             "name": re.search(r"name[:\s]*([\w\s]+)", text),
-#             "roll_number": re.search(r"roll number[:\s]*([\w\d]+)", text),
-#             "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
-#             "board": re.search(r"board[:\s]*([\w\s]+)", text),
-#             "name_spacy": get_entities("PERSON"),
-#             "board_spacy": get_entities("ORG"),
-#         },
-#         "marksheet_12th": {
-#             "name": re.search(r"name[:\s]*([\w\s]+)", text),
-#             "roll_number": re.search(r"roll number[:\s]*([\w\d]+)", text),
-#             "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
-#             "board": re.search(r"board[:\s]*([\w\s]+)", text),
-#             "name_spacy": get_entities("PERSON"),
-#             "board_spacy": get_entities("ORG"),
-#         },
-#         "pwd_certificate": {
-#             "name": re.search(r"name[:\s]*([\w\s]+)", text),
-#             "category": re.search(r"category[:\s]*([\w\s]+)", text),
-#             "disability_percentage": re.search(r"disability percentage[:\s]*([\d.]+)", text),
-#             "name_spacy": get_entities("PERSON"),
-#             "category_spacy": get_entities("ORG"),
-#         }
-#     }
+    # Define extractors with regex and spaCy entities
+    extractors = {
+        "gate_score_card": {
+            "candidate_name": re.search(r"Name of Candidate[:\s]*([A-Za-z\s]+)", text),
+            "parent_name": re.search(r"Parent's/Guardian's Name[:\s]*([A-Za-z\s]+)", text),
+            "registration_number": re.search(r"Registration Number[:\s]*([\w-]+)", text),
+            "exam_paper": re.search(r"Examination Paper[:\s]*([A-Za-z\s]+)", text),
+            "gate_score": re.search(r"GATE Score[:\s]*([\d.]+)", text),
+            "marks": re.search(r"Marks out of 100[:\s]*([\d.]+)", text),
+            "rank": re.search(r"All India Rank[:\s]*([\d]+)", text),
+            "validity_date": re.search(r"Valid up to[:\s]*([\d\sA-Za-z]+)", text),
+            "candidate_name_spacy": get_entities("PERSON"),
+            "validity_date_spacy": get_entities("DATE"),
+        },
+        "birth_certificate": {
+            "name": re.search(r"name[:\s]*([\w\s]+)", text),
+            "date_of_birth": re.search(r"date of birth[:\s]*(\d{2}-\d{2}-\d{4})", text),
+            "name_spacy": get_entities("PERSON"),
+            "date_of_birth_spacy": get_entities("DATE"),
+        },
+        "eq_certificate": {
+            "name": re.search(r"name[:\s]*([\w\s]+)", text),
+            "degree": re.search(r"degree[:\s]*([\w\s]+)", text),
+            "cgpa": re.search(r"cgpa[:\s]*([\d.]+)", text),
+            "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
+            "class": re.search(r"class[:\s]*([\w\s]+)", text),
+            "name_spacy": get_entities("PERSON"),
+            "degree_spacy": get_entities("ORG"),
+        },
+        "marksheet_10th": {
+            "name": re.search(r"name[:\s]*([\w\s]+)", text),
+            "roll_number": re.search(r"roll number[:\s]*([\w\d]+)", text),
+            "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
+            "board": re.search(r"board[:\s]*([\w\s]+)", text),
+            "name_spacy": get_entities("PERSON"),
+            "board_spacy": get_entities("ORG"),
+        },
+        "marksheet_12th": {
+            "name": re.search(r"name[:\s]*([\w\s]+)", text),
+            "roll_number": re.search(r"roll number[:\s]*([\w\d]+)", text),
+            "percentage": re.search(r"percentage[:\s]*([\d.]+)", text),
+            "board": re.search(r"board[:\s]*([\w\s]+)", text),
+            "name_spacy": get_entities("PERSON"),
+            "board_spacy": get_entities("ORG"),
+        },
+        "pwd_certificate": {
+            "name": re.search(r"name[:\s]*([\w\s]+)", text),
+            "category": re.search(r"category[:\s]*([\w\s]+)", text),
+            "disability_percentage": re.search(r"disability percentage[:\s]*([\d.]+)", text),
+            "name_spacy": get_entities("PERSON"),
+            "category_spacy": get_entities("ORG"),
+        }
+    }
 
-#     # Extract data using regex and spaCy for the specific certificate type
-#     extracted_data = {}
-#     for key, value in extractors.get(cert_type, {}).items():
-#         if isinstance(value, list):  # If the value is a list (from spaCy entities)
-#             extracted_data[key] = value
-#         else:  # If the value is a regex match object
-#             extracted_data[key] = (value.group(1).strip() if value else None)
+    # Extract data using regex and spaCy for the specific certificate type
+    extracted_data = {}
+    for key, value in extractors.get(cert_type, {}).items():
+        if isinstance(value, list):  # If the value is a list (from spaCy entities)
+            extracted_data[key] = value
+        else:  # If the value is a regex match object
+            extracted_data[key] = (value.group(1).strip() if value else None)
 
-#     # Add the detected certificate type
-#     extracted_data["certificate_type"] = cert_type
+    # Add the detected certificate type
+    extracted_data["certificate_type"] = cert_type
 
-#     # Clean up the extracted data fields
-#     for key in extracted_data:
-#         if isinstance(extracted_data[key], str):
-#             extracted_data[key] = clean_text(extracted_data[key])
+    # Clean up the extracted data fields
+    for key in extracted_data:
+        if isinstance(extracted_data[key], str):
+            extracted_data[key] = clean_text(extracted_data[key])
 
-#     # Add processing time
-#     elapsed_time = time.time() - start_time
-#     extracted_data["processing_time"] = elapsed_time
+    # Add processing time
+    elapsed_time = time.time() - start_time
+    extracted_data["processing_time"] = elapsed_time
 
-#     return extracted_data
+    return extracted_data
 
-# # Example usage
-# text = """Department = Empowerment Persons with Disabilities, Ministry Social Justice and Empowerment; Government of India Disability Certificate Issuing Medical Authority, Buldhana Maharashtra Cerifcate 0H0420619680200284 Date: 19/03/2010 Tnis is t0 cerify tha: Ilve have Carefully examined Shri Shivgir Daulatgir Giri, Son of Snr Daulatgir Giri; Daze of Birth 10/09/1968, Age 52 Male Istariot Nc 2704/00000/2101/0264006 reeident Hcuee Nc At Katoda Post Gangalgaon 443201 Sub Distric: Chikhli, Dis-rict Buldhana Stte Maharasntra wnos) pnczoorpn afxed arove, anc |m/we are sa0isne3-nat; (A) He i5 2 Cise Locomotor Disability The d zgnosis OPERATED CASE OF LUMBER DISC WITA PARAPARESIS ICI He has 459/in figure) Forty Five percentiin words) Permanen: Disabilty in relation t0 nis 0E- -ne owideiines (Guidelines for the pirpcse aesessingte exnt specifed Cisability percn induded under APwD Act, 2016 nctine- oovemtimens Inzia vice5.0. 7G0E| cated 01/01/20181. pplicant has srbmitted tre fcllowiinz Jocumentie Droot reeiderre Nature Documentis ; hocnoor ciro S gnature Thumi Impression of the Person with Disability Signatory notifed Medica Atiorizy Memberls) Issuing Medical Authority 3u dnanz Manbrasnttz Utt @AFELNMaie Mejnlio Lerby Ie jbIy 0 lerein underol anEEIL IEL Crdie "ou aM JLPO= RCS Cftt OrE_"""
+# Example usage
+text = """Department = Empowerment Persons with Disabilities, Ministry Social Justice and Empowerment; Government of India Disability Certificate Issuing Medical Authority, Buldhana Maharashtra Cerifcate 0H0420619680200284 Date: 19/03/2010 Tnis is t0 cerify tha: Ilve have Carefully examined Shri Shivgir Daulatgir Giri, Son of Snr Daulatgir Giri; Daze of Birth 10/09/1968, Age 52 Male Istariot Nc 2704/00000/2101/0264006 reeident Hcuee Nc At Katoda Post Gangalgaon 443201 Sub Distric: Chikhli, Dis-rict Buldhana Stte Maharasntra wnos) pnczoorpn afxed arove, anc |m/we are sa0isne3-nat; (A) He i5 2 Cise Locomotor Disability The d zgnosis OPERATED CASE OF LUMBER DISC WITA PARAPARESIS ICI He has 459/in figure) Forty Five percentiin words) Permanen: Disabilty in relation t0 nis 0E- -ne owideiines (Guidelines for the pirpcse aesessingte exnt specifed Cisability percn induded under APwD Act, 2016 nctine- oovemtimens Inzia vice5.0. 7G0E| cated 01/01/20181. pplicant has srbmitted tre fcllowiinz Jocumentie Droot reeiderre Nature Documentis ; hocnoor ciro S gnature Thumi Impression of the Person with Disability Signatory notifed Medica Atiorizy Memberls) Issuing Medical Authority 3u dnanz Manbrasnttz Utt @AFELNMaie Mejnlio Lerby Ie jbIy 0 lerein underol anEEIL IEL Crdie "ou aM JLPO= RCS Cftt OrE_"""
 
-# extracted_data = extract_schema_with_spacy_and_regex(text)
-# print(extracted_data)
+extracted_data = extract_schema_with_spacy_and_regex(text)
+print(extracted_data)
 
 
 
