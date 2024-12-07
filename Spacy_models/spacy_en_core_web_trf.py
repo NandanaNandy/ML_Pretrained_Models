@@ -54,62 +54,7 @@ def extract_entity_relationships_to_json(texts):
 
 
 # Example Input (Unstructured Data)
-text = """
-GOVERNMENT OF TAMIL NADU
-ak pares 3, DIRECTORATE OF TECHNICAL EDUCATION
-ee Sy TAMIL NADU ENGINEERING ADMISSION - 2022
-Application Number: 305994
-Personal Information
-Name: RAJESH S Name of the Parent/Guardian: SARAVANAN S
-Communication Address: 107/D4, SOLARAJAPURAM STREET, Permanent Address: 107/D4, SOLARAJAPURAM STREET,
-AAVARAMPATTI, AAVARAMPATTI,
-RAJAPALAYAM - 626117 RAJAPALAYAM - 626117
-State: Tamil nadu District; Virudhunagar
-Taluk: Rajapalayam Communication address pincode: 626117
-Native District: Virudhunagar Civic status of Native Place: Municipality
-Date of Birth (DD-MM-YYYY): 15-04-2005 Gender: Male
-Mother Tongue: Tamil Nationality: Indian
-Nativity: Tamil nadu Religion: Hindu
-Name of the Community: BC Name of the Caste: Senaithalaivar, Senaikudiyar and Illaivaniar
-Aadhar Number (optional): 295206496531
-Special Reservation Information
-Whether you are a candidate under quota for Eminent Sports person as per Ex-Servicemen (Only Army/Navy/ Air force services are Eligible): No
-annexure-ll, item No.22 of information brochure?:
-No
-Differently Abled Person: No Differently Abled Type: -
-TFC Center for certificate verification:
-PAC Ramasamy Raja's Polytechnic College,Rajapalayam - 626 108
-Scholarship Information
-Parent Occupation: Self Employed Annual Income: 96000
-Are you a First Graduate?: Yes Post Matric Scholarship (SC/SCA/ST/Converted Christians): No
-School of Study Information
-Category of School: Govt. Aided Civic status of school location (+2): Municipality
-Have you studied VIII to XII in Tamil Nadu?: Yes Have you studied from VI to VIII in private school under RTE and IX to XII in
-Government School?:
-No
-Have you studied VI to XII in Government school?: No
-Class Year of Passing Name of the schoo! District State Block Category of
-Govt.School
-VI Std. 2016 N.a Annapparaja Memorial H S S Ra- Virudhunagar Tamil nadu Rajapalayam -
-japalayam
-japalayam
-japalayam
-japalayam
-japalayam
-japalayam
-japalayam
-Academic Information
-Qualifying Examination: HSC Name of the Board of Examination:
-Tamil nadu Board of Higher Secondary Education
-Permanent register number: 2111119945 HSC Roll number: 5119714
-Qualified Year: 2022 HSC Group: HSC Academic
-Group Code: Physics/ Chemistry/ Maths/ Biology Medium of Instruction: Tamil
-HSC maximum (total) marks: 600 HSC obtained marks: 513
-SSLC maximum (total) marks: 500 SSLC obtained marks: 424
-Have you applied for NEET ?: No Have you applied for JEE ?: No
-Educational Management Information System(EMIS) Number: Community certificate number: FFDB678C6A687B86
-332606127 7500257
-"""
+text = """Serial Mo GOVERNMENT OF TAMIL NADU CMA DEPARTMENT QF TECHNICAL EDUCAION 044493 CONSOLIDATED MARKSHEET Kom Date of Birth Name 0f Student Register Number 30-Jun-1988 RAMESH P N 2413465 Name & Address of the Institution Institution Code KS RENGASAMY INSTITUTE OF TECHNOLOGY 328 GOUNDAMPALAYAM THOKAVADI PO 637 209 Discipline Scheme ELECTRICAL AND ELECTRONICS ENGINEERING (FULL TIME) J SCHEME 1030 Minimum Marks Month & Year of Maximum Marks Year/ Column Subject Name Marks for Pass Secured Passing Semester Number 100 40 50 APR 2004 01 ENGLISH 100 40 59 APR 2004 02* BASICS OF COMPUTER SCIENCE 100 40 74 APR 2004 03* MATHEMATICS 100 40 82 APR 2004 04* MATHEMATICS II 100 40 70 APR 2004 05* APPLIED PHYSICS 100 40 81 APR 2004 06* APPLIED CHEMISTRY 100 40 58 APR 2004 07* TECHNICAL DRAWING 100 50 90 APR 2004 08* APPLIED PHYSICS PRACTICAL 100 50 67 APR 2004 09* APPLIED CHEMISTRY PRACTICAL 100 50 82 APR 2004 10* WORKSHOP 100 50 84 APR 2004 11 ENGLISH COMMUNICATION PRACTICAL 100 40 67 OCT 2004 01 ELECTRICAL CIRCUIT THEORY 100 40 63 OCT 2004 02 ELECTRICAL MACHINES 100 40 55 OCT 2004 03 ELECTRONIC DEVICES AND CIRCUITS 100 50 94 OCT 2004 04 ELECTRICAL MACHINES LAB 100 50 87 OCT 2004 05 ELECTRONIC DEVICES AND CIRCUITS LAB 100 50 94 OCT 2004 06 MS OFFICE LAB 100 40 73 APR 2005 01 ELECTRICAL MACHINES Il 100 40 75 APR 2005 02 MEASUREMENT AND INSTRUMENTATION 100 40 80 APR 2005 03 BASICS OF MECHANICAL ENGINEERING 100 50 89 APR 2005 04 ELECTRICAL MACHINES LAB II 50 90 APR 2005 05 COMPUTER AIDED ELECTRICAL DRAWING LAB 100 97 APR 2005 06 MECHANICAL ENGINEERING LAB 100 50 01 GENERATION TRANSMISSION AND SWITCHGEAR 100 40 92 OCT 2005 02 ANALOG AND DIGITAL ELECTRONICS 100 40 80 OCT 2005 03 ET1-CONTROL OF ELECTRICAL MACHINES 100 40 76 OCT 2005 04 WIRING WINDING AND ESTIMATION LAB 100 50 89 OCT 2005 05 ANALOG AND DIGITAL ELECTRONICS LAB 100 50 94 OCT 2005 06 EP-CONTROL OF ELECTRICAL MACHINES LAB 100 50 93 OCT 2005 01 DISTRIBUTION AND UTILISATION 100 40 82 APR 2006 02 MICRO CONTROLLERS 100 40 61 APR 2006 03 ET2-POWER ELECTRONICS 100 40 88 APR 2006 04 MICRO CONTROLLER LAB 100 50 90 APR 2006 05 EP-POWER ELECTRONICS LAB 100 50 96 APR 2006 06 PROJECT WORK AND ENTREPRENEURSHIP 100 50 97 APR 2006 DURATION OF THE COURSE THREE YEARS Diploma Certificate Total Marks Percentage Class Provisional Certificate Number Number 2002 / 2400 83.42 % FIRST CLASS WITH HONOURS ABO235447 B252706 Marks in these subject(s) are not included for computation of aggregate total and award of class 9176 DATE 07-SEP-2006 CHAIRMAN BOARD OF EXAMINATIONS, CHENNAI-25"""
 
 # Example usage
 texts = [text]  # Wrap your single input text in a list
