@@ -56,9 +56,11 @@ teredli - 8 5CMarks-16122021-06593""",
     (71, 100, "NAME"),      # "SANNAPUREDDY NARAYANA REDDY"
     (341, 351, "DOB"),      # "16-Jun-1994"
     (566, 569, "TOTAL_MARK")# "505"
+    print(f"Entity: {text[start:end]}, Label: {label}")
 ]
         }
     ),
+    
     (
         """32241735
 சான்றிகழ் விளை
@@ -1344,154 +1346,154 @@ for entity in TRAIN_DATA:
 
 exit()
 
-# Step 2: Initialize the NLP Model
-# Load a pre-trained model or create a blank one
-nlp = spacy.load("en_core_web_lg")  # or spacy.blank("en") for a blank model
+# # Step 2: Initialize the NLP Model
+# # Load a pre-trained model or create a blank one
+# nlp = spacy.load("en_core_web_lg")  # or spacy.blank("en") for a blank model
 
-# Add the NER component to the pipeline if it's not already present
-if "ner" not in nlp.pipe_names:
-    ner = nlp.add_pipe("ner", last=True)
-else:
-    ner = nlp.get_pipe("ner")
+# # Add the NER component to the pipeline if it's not already present
+# if "ner" not in nlp.pipe_names:
+#     ner = nlp.add_pipe("ner", last=True)
+# else:
+#     ner = nlp.get_pipe("ner")
 
-# Step 3: Add Labels to the NER Component
-# Add custom labels to the NER component
-for _, annotations in TRAIN_DATA:
-    for ent in annotations["entities"]:
-        ner.add_label(ent[2])
+# # Step 3: Add Labels to the NER Component
+# # Add custom labels to the NER component
+# for _, annotations in TRAIN_DATA:
+#     for ent in annotations["entities"]:
+#         ner.add_label(ent[2])
 
-# Step 4: Train the Model
-# Disable other pipeline components to focus on training the NER
-other_pipes = [pipe for pipe in nlp.pipe_names if pipe != "ner"]
-with nlp.disable_pipes(*other_pipes):
-    optimizer = nlp.initialize()  # Correct initialization
-    for epoch in range(30):  # Adjust epochs as needed
-        random.shuffle(TRAIN_DATA)
-        losses = {}
-        for text, annotations in TRAIN_DATA:
-            example = Example.from_dict(nlp.make_doc(text), annotations)
-            nlp.update([example], drop=0.5, losses=losses)  # Adjust drop rate if needed
-        print(f"Losses at epoch {epoch}: {losses}")
+# # Step 4: Train the Model
+# # Disable other pipeline components to focus on training the NER
+# other_pipes = [pipe for pipe in nlp.pipe_names if pipe != "ner"]
+# with nlp.disable_pipes(*other_pipes):
+#     optimizer = nlp.initialize()  # Correct initialization
+#     for epoch in range(30):  # Adjust epochs as needed
+#         random.shuffle(TRAIN_DATA)
+#         losses = {}
+#         for text, annotations in TRAIN_DATA:
+#             example = Example.from_dict(nlp.make_doc(text), annotations)
+#             nlp.update([example], drop=0.5, losses=losses)  # Adjust drop rate if needed
+#         print(f"Losses at epoch {epoch}: {losses}")
 
-# Step 5: Save the Trained Model
-# Save the model to a directory
-nlp.to_disk("E:\ML_Pretrained_Models\Spacy_models")
-print("Model saved!")
+# # Step 5: Save the Trained Model
+# # Save the model to a directory
+# nlp.to_disk("E:\ML_Pretrained_Models\Spacy_models")
+# print("Model saved!")
 
-# Step 6: Test the Model
-# Load the trained model
-custom_nlp = spacy.load("E:\ML_Pretrained_Models\Spacy_models")
+# # Step 6: Test the Model
+# # Load the trained model
+# custom_nlp = spacy.load("E:\ML_Pretrained_Models\Spacy_models")
 
-# Test with new text
-test_text = """32396331
-சான்றிதழ் வ. எண்
-CERTIFICATE SL. NO : HSS
-தமிழ்நாடு மாநிலப் பள்ளித் தேர்வுகள் குழுமம்
-STATE BOARD OF SCHOOL EXAMINATIONS, TAMILNADU
-அரசுத் தேர்வுகள் துறை, சென்னை - 600 006
-DEPARTMENT OF GOVERNMENT EXAMINATIONS, CHENNAI - 600 006
-மேல்நிலைப் பள்ளிக் கல்வி இரண்டாமாண்டு மதிப்பெண் சான்றிதழ்
-HIGHER SECONDARY COURSE - SECOND YEAR MARK CERTIFICATE
-தமிழ்நாடு அரசின் அதிகாரத்திற்கு உட்பட்டு வழங்கப்படுகிறது
-ISSUED UNDER THE AUTHORITY OF THE GOVERNMENT OF TAMILNADU
-தேர்வரின் பெயர் / NAME OF THE CANDIDATE
-மதிப்பெண் சான்றிதழ்
-வழங்கப்பட்ட பருவம்
-வெள்ளியங்கிரி பெ
-மற்றும் வருடம்/SESSION
-VELLIYANGIRI P
-AND YEAR OF ISSUE OF
-MARK CERTIFICATE
-நிரந்தரப் பதிவெண் / PERMANENT REGISTER NUMBER
-பிறந்த தேதி / DATE OF BIRTH
-மே 2022
-26/01/2005
-2111360426
-MAY 2022
-மேல்நிலைப் பள்ளிக் கல்வி இரண்டாமாண்டு பொதுத் தேர்வெழுதிய மேற்காண் தேர்வர்
-கீழ்க்குறிப்பிட்டுள்ள
-பாடங்களில் தேர்வெழுதி தேர்ச்சி பெற்றுள்ளார் எனச் சான்றளிக்கப்படுகிறது
-Certified that the above mentioned candidate passed the following subjects in the Higher Secondary Second Year Examination.
-கருத்தியல் | செய்முறை அகமதிப்பீடு
-ெற்ற 
-மதிப்பெண்கள் 100 க்கு
-தேர்ச்சி பெற்ற பருவம், வருடம்
-um to
-THEORY
-PRACTICAL
-INTERNAL
-மற்றும் தேர்வெண்
-SUBJECT
-MARKS
-SESSION, YEAR AND
-70/90
- 20/75
-10/25
-OBTAINED FOR 100
-ROLL NO. OF PASSING
-தமிழ்
-086
-010
-096
-5360627 MAY 2022
-TAMIL
-ஆங்கிலம்
-010
-070
-060
-5360627 MAY 2022
-ENGLISH
-இயற்பியல்
-048
-020
-010
-078
-5360627 MAY 2022
-PHYSICS
-வேதியியல்
-058
-020
-010
-088
-5360627 MAY 2022
-CHEMISTRY
-உயிரியல்
-051
-020
-010
-081
-5360627 MAY 2022
-BIOLOGY
-கணிதவியல்
-074
-010
-084
-5360627 MAY 2022
-MATHEMATICS
-மொத்த மதிப்பெண்கள் / TOTAL MARKS :
-0497
-ZERO FOUR NINE SEVEN
-பள்ளியின் பெயர் / SCHOOL NAME
-( 055/TCGE0078/055040 )
-KANDASWAMI KANDAR'S HIGHER SECONDARY SCHOOL VELUR
-கந்தசாமிக் கண்டர் மேல்நிலைப்பள்ளி, வேலூர்
-பயிற்றுமொழி / MEDIUM OF INSTRUCTION
-பாடத்தொகுப்பு எண் மற்றும் பெயர் / GROUP CODE AND NAME
-TAMIL
-பொதுக்கல்வி
-/
-GENERAL EDUCATION
-அ.ம.ப. குறியீட்டெண் & நாள் / T.M.R.CODE NO.& DATE
-2503
-A2323795
-20.06.2022
-EMIS ID No. 3309140220300028
-மாநிலப் பள்ளித் தேர்வுகள் குழுமம் (மேல்நிலை) தமிழ்
-MEMBER SECRETARY
-E OF THE CAND
-STATE BOARD OF SCHOOL EXAMINATIONS (HR.SEC) TAMILNADU"""
-doc = custom_nlp(test_text)
+# # Test with new text
+# test_text = """32396331
+# சான்றிதழ் வ. எண்
+# CERTIFICATE SL. NO : HSS
+# தமிழ்நாடு மாநிலப் பள்ளித் தேர்வுகள் குழுமம்
+# STATE BOARD OF SCHOOL EXAMINATIONS, TAMILNADU
+# அரசுத் தேர்வுகள் துறை, சென்னை - 600 006
+# DEPARTMENT OF GOVERNMENT EXAMINATIONS, CHENNAI - 600 006
+# மேல்நிலைப் பள்ளிக் கல்வி இரண்டாமாண்டு மதிப்பெண் சான்றிதழ்
+# HIGHER SECONDARY COURSE - SECOND YEAR MARK CERTIFICATE
+# தமிழ்நாடு அரசின் அதிகாரத்திற்கு உட்பட்டு வழங்கப்படுகிறது
+# ISSUED UNDER THE AUTHORITY OF THE GOVERNMENT OF TAMILNADU
+# தேர்வரின் பெயர் / NAME OF THE CANDIDATE
+# மதிப்பெண் சான்றிதழ்
+# வழங்கப்பட்ட பருவம்
+# வெள்ளியங்கிரி பெ
+# மற்றும் வருடம்/SESSION
+# VELLIYANGIRI P
+# AND YEAR OF ISSUE OF
+# MARK CERTIFICATE
+# நிரந்தரப் பதிவெண் / PERMANENT REGISTER NUMBER
+# பிறந்த தேதி / DATE OF BIRTH
+# மே 2022
+# 26/01/2005
+# 2111360426
+# MAY 2022
+# மேல்நிலைப் பள்ளிக் கல்வி இரண்டாமாண்டு பொதுத் தேர்வெழுதிய மேற்காண் தேர்வர்
+# கீழ்க்குறிப்பிட்டுள்ள
+# பாடங்களில் தேர்வெழுதி தேர்ச்சி பெற்றுள்ளார் எனச் சான்றளிக்கப்படுகிறது
+# Certified that the above mentioned candidate passed the following subjects in the Higher Secondary Second Year Examination.
+# கருத்தியல் | செய்முறை அகமதிப்பீடு
+# ெற்ற 
+# மதிப்பெண்கள் 100 க்கு
+# தேர்ச்சி பெற்ற பருவம், வருடம்
+# um to
+# THEORY
+# PRACTICAL
+# INTERNAL
+# மற்றும் தேர்வெண்
+# SUBJECT
+# MARKS
+# SESSION, YEAR AND
+# 70/90
+#  20/75
+# 10/25
+# OBTAINED FOR 100
+# ROLL NO. OF PASSING
+# தமிழ்
+# 086
+# 010
+# 096
+# 5360627 MAY 2022
+# TAMIL
+# ஆங்கிலம்
+# 010
+# 070
+# 060
+# 5360627 MAY 2022
+# ENGLISH
+# இயற்பியல்
+# 048
+# 020
+# 010
+# 078
+# 5360627 MAY 2022
+# PHYSICS
+# வேதியியல்
+# 058
+# 020
+# 010
+# 088
+# 5360627 MAY 2022
+# CHEMISTRY
+# உயிரியல்
+# 051
+# 020
+# 010
+# 081
+# 5360627 MAY 2022
+# BIOLOGY
+# கணிதவியல்
+# 074
+# 010
+# 084
+# 5360627 MAY 2022
+# MATHEMATICS
+# மொத்த மதிப்பெண்கள் / TOTAL MARKS :
+# 0497
+# ZERO FOUR NINE SEVEN
+# பள்ளியின் பெயர் / SCHOOL NAME
+# ( 055/TCGE0078/055040 )
+# KANDASWAMI KANDAR'S HIGHER SECONDARY SCHOOL VELUR
+# கந்தசாமிக் கண்டர் மேல்நிலைப்பள்ளி, வேலூர்
+# பயிற்றுமொழி / MEDIUM OF INSTRUCTION
+# பாடத்தொகுப்பு எண் மற்றும் பெயர் / GROUP CODE AND NAME
+# TAMIL
+# பொதுக்கல்வி
+# /
+# GENERAL EDUCATION
+# அ.ம.ப. குறியீட்டெண் & நாள் / T.M.R.CODE NO.& DATE
+# 2503
+# A2323795
+# 20.06.2022
+# EMIS ID No. 3309140220300028
+# மாநிலப் பள்ளித் தேர்வுகள் குழுமம் (மேல்நிலை) தமிழ்
+# MEMBER SECRETARY
+# E OF THE CAND
+# STATE BOARD OF SCHOOL EXAMINATIONS (HR.SEC) TAMILNADU"""
+# doc = custom_nlp(test_text)
 
-print("Entities found:")
-for ent in doc.ents:
-    print(f"Entity: {ent.text}, Label: {ent.label_}")
+# print("Entities found:")
+# for ent in doc.ents:
+#     print(f"Entity: {ent.text}, Label: {ent.label_}")

@@ -1,1 +1,2 @@
-GATE: GATE 2022 Scorecard Graduate Aptitude Test in Engineering Graduate Aptitude Test in Engineering (GATE) Name of Candidate MOHAMMAD WASIF ANSARI Parent's/Guardian's AKHTARI KHATOON Registration Number 1234567890 Examination Paper Computer Science and Information Technology (CS) GATE Score: 855 Marks out of 100: 63.33 All India Rank in this paper: 68 Valid up to 31st March 2025
+cr_text_hi = """सारणी मो GOVERNMENT OF TAMIL NADU CMA DEPARTMENT QF TECHNICAL EDUCAION 044493 CONSOLIDATED MARKSHEET 
+# नाम 0
