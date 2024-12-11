@@ -56,7 +56,8 @@ teredli - 8 5CMarks-16122021-06593""",
     (71, 100, "NAME"),      # "SANNAPUREDDY NARAYANA REDDY"
     (341, 351, "DOB"),      # "16-Jun-1994"
     (566, 569, "TOTAL_MARK")# "505"
-    print(f"Entity: {text[start:end]}, Label: {label}")
+    
+    
 ]
         }
     ),
